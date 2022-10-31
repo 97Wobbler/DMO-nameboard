@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Working Status</title>
+    <style>
+        html {
+            background-color: #1e2d3c;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        html, body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        #name-rank-box {
+            text-align: center;
+            color: white;
+            font-size: 13vw;
+        }
+        #employee-rank {
+            font-size: smaller;
+            opacity: 0.6;
+        }
+        #employee-rank {
+            font-size: smaller;
+            opacity: 0.6;
+        }
+        #employee-status {
+            color: #00ff00;
+            font-size: smaller;
+            opacity: 0.8;
+            font-size: 9vw;
+        }
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="noselect">
+    <div id="name-rank-box">
+        <span id="employee-name">성이름</span> <span id="employee-rank">책임 파트장</span>
+    </div>
+    <div id="employee-status">
+        근무중
+    </div>
+
+    <script>
+        var eName = document.getElementById("employee-name");
+        var eRank = document.getElementById("employee-rank");
+        var eStatus = document.getElementById("employee-status");
+
+        var getParam = function(key) {
+            var _parammap = {};
+            document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+                function decode(s) {
+                    return decodeURIComponent(s.split("+").join(" "));
+                };
+                _parammap[decode(arguments[1])] = decode(arguments[2]);
+            });
+            return _parammap[key];
+        };
+        
+        if (!!getParam("name")) {
+            eName.innerHTML = getParam("name");
+        };
+        
+        if (!!getParam("rank")) {
+            eRank.innerHTML = getParam("rank");
+        };
+        
+        if (!!getParam("status")) {
+            eStatus.innerHTML = getParam("status");
+        };
+        
+        if (!!getParam("statusColor")) {
+            eStatus.style.color = "#" + getParam("statusColor");
+        };
+
+    </script>
+</body>
+</html>
